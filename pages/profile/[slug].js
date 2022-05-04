@@ -291,31 +291,6 @@ const Profile = ({
           </div>
         :null}
 
-        {Account.contactme?<div className="my-10"></div>:null}
-
-        {Account.links?
-          <div className="flex flex-col w-full items-center md:max-w-[40%] max-w-[95%]">
-
-          {Account.contactme?
-            <div className="w-full flex flex-col items-center">
-              <h2 className="text-Text font-poppins font-[500] text-xl md:text-3xl lg:text-4xl tracking-wide leading-[1]">Links</h2>
-              <div className="border-[1px] my-8 w-32 border-Text"></div>
-            </div>
-          :null}
-
-            <div className="links w-full space-y-10">
-
-              {Account.links.map((button) => (
-                  <a className="border-2 bg-SecondryColour border-SecondryColour group rounded hover:bg-transparent flex items-center justify-center h-12 w-full transition-all">
-                    <p className="focus:outline-none font-semibold text-sm text-Text transition-all group-hover:text-SecondryColour font-rubik tracking-wide">{button.buttontitle}</p>
-                  </a>
-              ))}
-              
-            </div>
-
-          </div>
-        :null}
-
       </div>
       :null}
 
