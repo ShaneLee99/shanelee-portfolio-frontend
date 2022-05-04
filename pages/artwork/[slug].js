@@ -70,18 +70,18 @@ const Portfolio = ({
         :null}
 
         <div className="mt-8 flex flex-col items-center">
-          <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-center mt-[2rem]">
+          <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-8 justify-center mt-[2rem]">
 
             {thumbnail?
               <div className="flex flex-col hover:scale-[0.95] transition-all items-center space-y-2 w-full h-auto">
-                <img className="rounded-lg w-auto h-full" src={urlFor(thumbnail.image)} />
+                <img className="rounded-lg w-full h-full" src={urlFor(thumbnail.image)} />
                 <p className="text-Text pt-4 text-xl font-rubik">{thumbnail.description}</p>
               </div>
             :null}
 
             {images?.map(( data ) => (
               <div className="flex flex-col hover:scale-[0.95] transition-all items-center space-y-2 w-full h-auto">
-                <img className="rounded-lg w-auto h-full" src={urlFor(data.image)} />
+                <img className="rounded-lg w-full h-full" src={urlFor(data.image)} />
                 <p className="text-Text pt-4 text-xl font-rubik">{data.description}</p>
               </div>
             ))}
