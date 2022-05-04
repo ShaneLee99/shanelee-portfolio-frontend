@@ -18,6 +18,8 @@ const Home = ({
   return (
         <div className="main">
 
+ 
+
           <div className="absolute top-0 left-0 w-full h-16 bg-clip-padding backdrop-blur-xl bg-opacity-50 bg-Background z-[420] flex items-center xl:px-40 lg:px-32 md:px-20 px-8 transition-all">
               
               {Navbar?.headerlogo?
