@@ -70,7 +70,7 @@ const Portfolio = ({
         :null}
 
         <div className="mt-8 flex flex-col items-center">
-          <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-8 items-start justify-center mt-[2rem]">
+          <div className="w-full h-full gap-8 items-start flex flex-wrap justify-center mt-[2rem]">
 
             {thumbnail?
               <div className="flex flex-col hover:scale-[0.95] transition-all items-center space-y-2 w-full h-auto">
