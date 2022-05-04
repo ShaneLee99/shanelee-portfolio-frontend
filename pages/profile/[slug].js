@@ -204,7 +204,7 @@ const Profile = ({
 
                 {Account.aboutme.software.map((software) => (
                     <div className="bg-SecondryBackground px-4 py-2 rounded-lg mr-[8px] transition-all flex items-center md:text-base text-sm">
-                        <img className="w-6 h-6 mr-2" src={urlFor(software.image)} />
+                        <img className="w-auto h-6 mr-2" src={urlFor(software.image)} />
                         {software.name}
                     </div>
                 ))}
