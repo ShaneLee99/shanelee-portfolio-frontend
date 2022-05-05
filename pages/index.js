@@ -99,23 +99,6 @@ const Home = ({
                 <div className="border-[1px] mt-8 mb-[5rem] w-64 border-Text"></div>
 
                 <div className="w-full h-full gap-8 items-start flex flex-wrap transition-all justify-center mt-[2rem]">
-
-                  {thumbnail?
-                    <div className="flex flex-col hover:scale-[0.95] transition-all items-center justify-center space-y-2 w-full md:w-[70%] lg:w-[48%] h-auto">
-                      <img className="rounded-lg w-full h-full" src={urlFor(thumbnail.image)} />
-                      <p className="text-Text pt-4 lg:text-xl md:text-base text-xs font-rubik">{thumbnail.description}</p>
-                    </div>
-                  :null}
-
-                  {images?.map(( data ) => (
-                    <div className="flex flex-col hover:scale-[0.95] transition-all items-center space-y-2 w-full md:w-[70%] lg:w-[48%] h-auto">
-                      <img className="rounded-lg w-full h-full" src={urlFor(data.image)} />
-                      <p className="text-Text pt-4 lg:text-xl md:text-base text-xs font-rubik">{data.description}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="w-full h-full gap-8 items-start flex flex-wrap transition-all justify-center mt-[2rem]">
                     {portfolios.map((portfolio) => (
                       portfolio.thumbnail && portfolio.title && portfolio.owninguser.name?
                         <a href={`/artwork/${portfolio.slug.current}`} className="w-full md:w-[49%] h-auto lg:w-[24%] hover:scale-[0.95] transition-all relative group rounded-xl flex flex-col items-center justify-center overflow-hidden">       
