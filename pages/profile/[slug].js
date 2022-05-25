@@ -200,10 +200,10 @@ const Profile = ({
 
               <div className="border-[1px] my-4 md:w-[12rem] w-full transition-all border-Text"></div>
 
-              <div className="text-Text font-rubik flex flex-wrap break-words leading-[45px] space-y-[8px] transition-all">
+              <div className="text-Text font-rubik flex flex-wrap break-words leading-[45px] transition-all items-center">
 
                 {Account.aboutme.software.map((software) => (
-                    <div className="bg-SecondryBackground px-4 py-2 max-h-7 h-full rounded-lg mr-[8px] transition-all flex items-center md:text-base text-sm">
+                    <div className="bg-SecondryBackground px-4 py-2 max-h-14 h-full rounded-lg mr-[8px] my-2 transition-all flex items-center md:text-base text-sm">
                         <img className="w-auto h-6 mr-2" src={urlFor(software.image)} />
                         {software.name}
                     </div>
