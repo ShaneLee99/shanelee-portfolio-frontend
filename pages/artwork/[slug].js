@@ -81,7 +81,7 @@ const Portfolio = ({
                 </div>
             :null}
             {thumbnail?
-                <div id="thumb-canvas" className="absolute w-full hidden h-full top-0 left-0 bg-Background">
+                <div id="thumb-canvas" className="absolute w-screen hidden min-h-screen h-full top-0 left-0 bg-Background items-center justify-center">
                   <img className="w-[80%] h-auto" src={urlFor(thumbnail.image)} />
                   <button onClick={() => {document.getElementById("thumb-canvas").style.display = "none"}} className="absolute top-5 right-20 space-x-5 h-10 w-auto flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-Text" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
