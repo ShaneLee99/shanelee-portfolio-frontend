@@ -75,7 +75,7 @@ const Portfolio = ({
           <div className="w-full h-full gap-8 items-start flex flex-wrap transition-all justify-center mt-[2rem]">
 
             {thumbnail?
-              <div>
+              <div className="flex items-center w-full">
                 <div onClick={() => {document.getElementById("thumb-canvas").style.display = "flex"}} className="flex flex-col hover:scale-[0.95] transition-all items-center justify-center space-y-2 w-full md:w-[70%] lg:w-[48%] h-auto">
                   <img className="rounded-lg w-full h-full" src={urlFor(thumbnail.image)} />
                   <p className="text-Text pt-4 lg:text-xl md:text-base text-xs font-rubik">{thumbnail.description}</p>
