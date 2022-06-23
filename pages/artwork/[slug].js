@@ -106,7 +106,7 @@ const Portfolio = ({
             :null}
 
             {images?.map(( data ) => (
-              <div className="flex flex-col hover:scale-[0.95] transition-all items-center space-y-2 w-full md:w-[70%] lg:w-[48%] h-auto">
+              <div onClick={() => {document.getElementById(`thumb-canvas-${data.id}`).style.display = "flex"}} className="flex flex-col hover:scale-[0.95] transition-all items-center space-y-2 w-full md:w-[70%] lg:w-[48%] h-auto">
                 <img className="rounded-lg w-full h-full" src={urlFor(data.image)} />
                 <p className="text-Text pt-4 lg:text-xl md:text-base text-xs font-rubik">{data.description}</p>
               </div>
