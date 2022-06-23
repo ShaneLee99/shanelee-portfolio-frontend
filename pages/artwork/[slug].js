@@ -28,6 +28,18 @@ const Portfolio = ({
         <p className="text-Text group-hover:text-FirstColour transition-all font-rubik">Go Back</p>
       </button>
 
+      {thumbnail?
+        <div id="thumb-canvas" className="absolute w-full hidden min-h-screen h-full top-0 left-0 bg-Background items-center justify-center">
+          <img className="w-[80%] h-auto" src={urlFor(thumbnail.image)} />
+          <button onClick={() => {document.getElementById("thumb-canvas").style.display = "none"}} className="absolute top-5 right-20 space-x-5 h-10 w-auto flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-Text" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h2 className="text-Text font-rubik">Close Image</h2>
+          </button>
+        </div>
+      :null} 
+
 
 
       <div className="py-20 flex flex-col items-center px-10 md:px-[4rem] lg:px-40">
@@ -71,7 +83,7 @@ const Portfolio = ({
           </div>
         :null}
 
-        <div className="mt-8 flex flex-col items-center">
+        <div className="mt-8 flex flex-col items-center w-full">
           <div className="w-full h-full gap-8 items-start flex flex-wrap transition-all justify-center mt-[2rem]">
 
             {thumbnail?
@@ -80,17 +92,6 @@ const Portfolio = ({
                   <p className="text-Text pt-4 lg:text-xl md:text-base text-xs font-rubik">{thumbnail.description}</p>
                 </div>
             :null}
-            {thumbnail?
-                <div id="thumb-canvas" className="absolute w-screen hidden min-h-screen h-full top-0 left-0 bg-Background items-center justify-center">
-                  <img className="w-[80%] h-auto" src={urlFor(thumbnail.image)} />
-                  <button onClick={() => {document.getElementById("thumb-canvas").style.display = "none"}} className="absolute top-5 right-20 space-x-5 h-10 w-auto flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-Text" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <h2 className="text-Text font-rubik">Close Image</h2>
-                  </button>
-                </div>
-            :null} 
 
             {images?.map(( data ) => (
               <div className="flex flex-col hover:scale-[0.95] transition-all items-center space-y-2 w-full md:w-[70%] lg:w-[48%] h-auto">
