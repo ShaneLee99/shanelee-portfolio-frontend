@@ -29,8 +29,8 @@ const Portfolio = ({
       </button>
 
       
-      <div id="canvas" className="absolute w-full hidden min-h-screen h-full top-0 left-0 bg-Background items-center justify-center">
-        <img className="w-[80%] h-auto"/>
+      <div id="canvas" className="absolute w-full hidden min-h-screen h-full top-0 left-0 overflow-hidden bg-Background items-center justify-center">
+        <img id="canvas-img" className="w-[80%] h-auto"/>
         <button onClick={() => {document.getElementById("canvas").style.display = "none"}} className="absolute top-5 right-20 space-x-5 h-10 w-auto flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-Text" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -86,14 +86,14 @@ const Portfolio = ({
           <div className="w-full h-full gap-8 items-start flex flex-wrap transition-all justify-center mt-[2rem]">
 
             {thumbnail?
-                <div onClick={() => {document.getElementById("canvas").style.display = "flex"; document.getElementById("canvas").src = `${thumbnail.image}`;}} className="flex flex-col hover:scale-[0.95] transition-all items-center justify-center space-y-2 w-full md:w-[70%] lg:w-[48%] h-auto">
+                <div onClick={() => {document.getElementById("canvas").style.display = "flex"; document.getElementById("canvas-img").src = `${thumbnail.image}`;}} className="flex flex-col hover:scale-[0.95] transition-all items-center justify-center space-y-2 w-full md:w-[70%] lg:w-[48%] h-auto">
                   <img className="rounded-lg w-full h-full" src={urlFor(thumbnail.image)} />
                   <p className="text-Text pt-4 lg:text-xl md:text-base text-xs font-rubik">{thumbnail.description}</p>
                 </div>
             :null}
 
             {images?.map(( data ) => (
-              <div onClick={() => {document.getElementById("canvas").style.display = "flex"; document.getElementById("canvas").src = `${data.image}`;}} className="flex flex-col hover:scale-[0.95] transition-all items-center space-y-2 w-full md:w-[70%] lg:w-[48%] h-auto">
+              <div onClick={() => {document.getElementById("canvas").style.display = "flex"; document.getElementById("canvas-img").src = `${data.image}`;}} className="flex flex-col hover:scale-[0.95] transition-all items-center space-y-2 w-full md:w-[70%] lg:w-[48%] h-auto">
                 <img className="rounded-lg w-full h-full" src={urlFor(data.image)} />
                 <p className="text-Text pt-4 lg:text-xl md:text-base text-xs font-rubik">{data.description}</p>
               </div>
