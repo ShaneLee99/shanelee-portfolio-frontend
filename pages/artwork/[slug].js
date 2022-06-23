@@ -75,11 +75,12 @@ const Portfolio = ({
           <div className="w-full h-full gap-8 items-start flex flex-wrap transition-all justify-center mt-[2rem]">
 
             {thumbnail?
-              <div className="flex items-center w-full">
                 <div onClick={() => {document.getElementById("thumb-canvas").style.display = "flex"}} className="flex flex-col hover:scale-[0.95] transition-all items-center justify-center space-y-2 w-full md:w-[70%] lg:w-[48%] h-auto">
                   <img className="rounded-lg w-full h-full" src={urlFor(thumbnail.image)} />
                   <p className="text-Text pt-4 lg:text-xl md:text-base text-xs font-rubik">{thumbnail.description}</p>
                 </div>
+            :null}
+            {thumbnail?
                 <div id="thumb-canvas" className="absolute w-full hidden h-full top-0 left-0 bg-Background">
                   <img className="w-[80%] h-auto" src={urlFor(thumbnail.image)} />
                   <button onClick={() => {document.getElementById("thumb-canvas").style.display = "none"}} className="absolute top-5 right-20 space-x-5 h-10 w-auto flex items-center">
@@ -89,8 +90,7 @@ const Portfolio = ({
                     <h2 className="text-Text font-rubik">Close Image</h2>
                   </button>
                 </div>
-              </div>
-            :null}
+            :null} 
 
             {images?.map(( data ) => (
               <div className="flex flex-col hover:scale-[0.95] transition-all items-center space-y-2 w-full md:w-[70%] lg:w-[48%] h-auto">
