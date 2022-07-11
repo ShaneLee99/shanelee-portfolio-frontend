@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { formatSizeUnits } from "../../utils"
 import BlockContent from '@sanity/block-content-to-react'
 import Router from 'next/router'
+import moment from 'moment';
 
 
 const blogpost = ({ 
@@ -150,7 +151,6 @@ export const getServerSideProps = async (pageContext) => {
 
   const blog = await sanityClient.fetch(query, { pageSlug })
 
-  var moment = require('moment'); // require
   const datetime = moment(blog.date).format(("dddd, MMMM Do YYYY, h:mm:ss a")); 
 
   var raw_blog = blog;

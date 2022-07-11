@@ -3,6 +3,7 @@ import { formatSizeUnits } from "../../utils"
 import JarallaxImage from '../../components/JarallaxImage';
 import Dynamic from 'next/dynamic';
 import BlockContent from '@sanity/block-content-to-react'
+import moment from 'moment';
 
 const Jarallax = Dynamic(() => import('../../components/Jarallax'), { ssr: false });
 
@@ -372,8 +373,6 @@ export const getServerSideProps = async (pageContext) => {
   const blog = await sanityClient.fetch(blog_query, { pageSlug })
 
   var fileinfo = account.ResumeFile;
-
-  var moment = require('moment'); // require
   const datetime = moment(blog.date).format(("dddd, MMMM Do YYYY, h:mm:ss a")); 
 
   if (!fileinfo) {

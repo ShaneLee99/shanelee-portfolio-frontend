@@ -1,6 +1,7 @@
 import { sanityClient, urlFor } from "../sanity"
 import Dynamic from 'next/dynamic';
 import React, { useState } from 'react';
+import moment from 'moment';
 
 const Jarallax = Dynamic(() => import('../components/Jarallax'), { ssr: false });
 
@@ -113,7 +114,6 @@ export const getServerSideProps = async () => {
   }`
   const navbar = await sanityClient.fetch(nav_query)
 
-  var moment = require('moment'); // require
   const datetime = moment(blogs.date).format(("dddd, MMMM Do YYYY, h:mm:ss a")); 
 
   if (!blogs.length) {
