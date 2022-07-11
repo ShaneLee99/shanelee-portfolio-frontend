@@ -3,7 +3,7 @@ import { formatSizeUnits } from "../../utils"
 import JarallaxImage from '../../components/JarallaxImage';
 import Dynamic from 'next/dynamic';
 import BlockContent from '@sanity/block-content-to-react'
-import moment from 'moment';
+import moment from 'moment'
 
 const Jarallax = Dynamic(() => import('../../components/Jarallax'), { ssr: false });
 

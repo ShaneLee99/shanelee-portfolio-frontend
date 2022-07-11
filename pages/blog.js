@@ -1,7 +1,7 @@
 import { sanityClient, urlFor } from "../sanity"
-import Dynamic from 'next/dynamic';
-import React, { useState } from 'react';
-import moment from 'moment';
+import Dynamic from 'next/dynamic'
+import React, { useState } from 'react'
+import moment from 'moment'
 
 const Jarallax = Dynamic(() => import('../components/Jarallax'), { ssr: false });
 

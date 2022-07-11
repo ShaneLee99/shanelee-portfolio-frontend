@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { formatSizeUnits } from "../../utils"
 import BlockContent from '@sanity/block-content-to-react'
 import Router from 'next/router'
-import moment from 'moment';
+import moment from 'moment'
 
 
 const blogpost = ({ 
