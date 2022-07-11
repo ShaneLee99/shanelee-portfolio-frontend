@@ -94,7 +94,7 @@ export const getServerSideProps = async () => {
   let cTime = current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
   const dateTime = cDate + ' ' + cTime;
   
-  const query = `*[_type == "blog" && date > dateTime]{
+  const query = `*[_type == "blog" && date < dateTime]{
     title,
     post,
     image,
