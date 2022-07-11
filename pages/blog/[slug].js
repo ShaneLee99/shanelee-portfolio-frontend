@@ -9,7 +9,6 @@ import Link from "next/link"
 import JarallaxImage from '../../components/JarallaxImage';
 import dynamic from 'next/dynamic';
 import BlockContent from '@sanity/block-content-to-react'
-import { stringify } from "querystring";
 import Router from 'next/router'
 
 
