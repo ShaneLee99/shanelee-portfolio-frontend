@@ -11,9 +11,7 @@ const Jarallax = dynamic(() => import('../components/Jarallax'), { ssr: false })
 const Home = ({
   portfolios, 
   home_page, 
-  Navbar, 
-  account, 
-  navbaralt
+  Navbar
 }) => {
   return (
         <div className="main">
@@ -141,24 +139,6 @@ export const getServerSideProps = async () => {
   }`
   const navbar = await sanityClient.fetch(nav_query)
 
-  const account_query = `*[ _type == "account"][0]{
-    name,
-    desc,
-    image,
-    banner,
-    aboutme,
-    resume,
-    "ResumeFile": resume.resume.asset->{
-      url,
-      size,
-      originalFilename
-    }
-  }`
-
-  const account = await sanityClient.fetch(account_query)
-
-  console.log(navbar)
-
 
   if (!portfolios.length) {
     return {
@@ -166,7 +146,6 @@ export const getServerSideProps = async () => {
         portfolios: [],
         home_page,
         Navbar: navbar,
-        account
       },
     }
   } else {
@@ -175,7 +154,6 @@ export const getServerSideProps = async () => {
         portfolios,
         home_page,
         Navbar: navbar,
-        account
       },
     }
   }

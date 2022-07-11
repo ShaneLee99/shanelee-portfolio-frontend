@@ -8,7 +8,6 @@ import Link from "next/link"
 import JarallaxImage from '../../components/JarallaxImage';
 import dynamic from 'next/dynamic';
 import BlockContent from '@sanity/block-content-to-react'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Jarallax = dynamic(() => import('../../components/Jarallax'), { ssr: false });
 
@@ -17,7 +16,9 @@ const Profile = ({
   Account,
   Navbar,
   Portfolios,
-  ResumeFile
+  ResumeFile,
+  Blog,
+  DateTime
 }) => {
   var Filesize = formatSizeUnits(ResumeFile?.size)
   return (
@@ -103,24 +104,15 @@ const Profile = ({
           {Account.resume?
             <a href="#resume">Resume</a>
           :null}
-          <a href="#contactme">Contact Me</a>
+            <a href="#blog">Blog</a>
+          {Account.contactme?
+            <a href="#contactme">Contact Me</a>
+          :null}
       </div>
 
       <div id="portfolio" className="mt-20 flex flex-col items-center px-20">
         <h2 className="text-Text font-poppins font-[800] text-2xl md:text-4xl lg:text-5xl uppercase tracking-wide leading-[1]">Portfolio</h2>
         <div className="border-[1px] my-8 w-64 border-Text"></div>
-        
-        {/* <div className="w-full h-full gap-8 flex flex-wrap transition-all items-start justify-center mt-10 lg:max-w-[70%]">
-            {Portfolios.map((portfolio) => (
-                <a href={`/artwork/${portfolio.slug.current}`} className="w-full md:w-[49%] h-full lg:w-[24%] hover:scale-[0.95] transition-all relative group rounded-xl flex flex-col items-center justify-center overflow-hidden">             
-                    <img className="w-full h-full transition-all" src={urlFor(portfolio.thumbnail.image)} />
-                    <div className="absolute bottom-0 left-0 w-full items-center justify-center transition-colors h-[50%] from-transparent via-Background/50 to-Background/70 group-hover:bg-gradient-to-b flex flex-col">
-                        <p className="font-rubik group-hover:text-Text font-[600] text-transparent text-base">{portfolio.title}</p>
-                        <p className="font-rubik group-hover:text-Text font-[300] text-transparent text-sm">By {Account.name}</p>
-                    </div>
-                </a>
-            ))}
-        </div> */}
 
         <div className="w-full h-full gap-8 items-start flex flex-wrap transition-all justify-center mt-[2rem]">
           {Portfolios.map((portfolio) => (
@@ -136,6 +128,29 @@ const Profile = ({
           ))}
         </div>
       </div>
+
+      {Blog?
+      <div id="blog" className="mt-20 flex flex-col items-center">
+        <h2 className="text-Text font-poppins font-[800] text-2xl md:text-4xl lg:text-5xl uppercase tracking-wide leading-[1]">Recent Blog Post</h2>
+        <div className="border-[1px] my-8 w-64 border-Text"></div>
+
+        <a href={`/blog/${Blog.slug.current}`} className="w-full md:max-w-4xl max-w-md h-44 bg-SecondryBackground rounded-xl flex items-center md:p-8 p-4 hover:scale-[0.98] transition-all">
+          <img src={urlFor(Blog.image)} className="md:w-[100px] md:h-[100px] h-[75px] w-[75px] rounded-full"></img>
+          <div className="text-Text ml-5">
+            <h2 className="font-[500] text-xl font-poppins">{Blog.title}</h2>
+            <div className="font-[300] md:text-base text-xs mt-2 text-Text font-rubik flex md:flex-row flex-col md:space-y-0 space-y-2">
+              <p className="mr-2">Posted: {DateTime}</p>
+              {Blog.portfolio.title?<p className="md:flex hidden mr-2">/</p>:null}
+              {Blog.portfolio.title?<p className="">Portfolio Refrence: {Blog.portfolio.title}</p>:null}
+            </div>
+          </div>
+        </a>
+
+        <a href="#" className="mt-10 bg-FirstColour border-2 border-FirstColour hover:bg-transparent text-Text hover:text-FirstColour h-10 w-32 flex items-center justify-center rounded-lg transition-all">
+            <h2>View All Posts</h2>
+        </a>
+      </div>
+      :null}
 
 
 
@@ -341,21 +356,30 @@ export const getServerSideProps = async (pageContext) => {
 
   const portfolio_query = `*[_type == "portfolio" && owninguser->slug.current == $pageSlug]{
     title,
-    owninguser->{
-        slug
-    },
     slug,
     thumbnail
+  }`
+
+  const blog_query = `*[_type == "blog" && owninguser->slug.current == $pageSlug][0]{
+    title,
+    post,
+    image,
+    slug,
+    date,
+    portfolio->{
+      title
+    }
   }`
 
   const account = await sanityClient.fetch(query, { pageSlug })
   const navbar = await sanityClient.fetch(nav_query)
   const portfolios = await sanityClient.fetch(portfolio_query, { pageSlug })
-
-  console.log("File")
-  console.log(account)
+  const blog = await sanityClient.fetch(blog_query, { pageSlug })
 
   var fileinfo = account.ResumeFile;
+
+  var moment = require('moment'); // require
+  const datetime = moment(blog.date).format(("dddd, MMMM Do YYYY, h:mm:ss a")); 
 
   if (!fileinfo) {
     fileinfo = null;
@@ -372,7 +396,9 @@ export const getServerSideProps = async (pageContext) => {
         Account: account,
         Navbar: navbar,
         Portfolios: portfolios,
-        ResumeFile: fileinfo
+        ResumeFile: fileinfo,
+        Blog: blog,
+        DateTime: datetime
       }
     }
   }

@@ -129,8 +129,6 @@ export const getServerSideProps = async (pageContext) => {
 
   const portfolio = await sanityClient.fetch(query, { pageSlug })
 
-  console.log(portfolio.file)
-
 
   var raw_portfolio = portfolio;
   var title = portfolio?.title;
