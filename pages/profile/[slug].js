@@ -123,7 +123,7 @@ const Profile = ({
         </div>
 
         <div className="w-full h-full gap-8 items-start flex flex-wrap transition-all justify-center mt-[2rem]">
-          {portfolios.map((portfolio) => (
+          {Portfolios.map((portfolio) => (
             portfolio.thumbnail && portfolio.title && portfolio.owninguser.name?
               <a href={`/artwork/${portfolio.slug.current}`} className="w-full md:w-[49%] h-full lg:w-[24%] hover:scale-[0.95] transition-all relative group rounded-xl flex flex-col items-center justify-center overflow-hidden">       
                   <img className="w-full h-full transition-all" src={urlFor(portfolio.thumbnail.image)} />
