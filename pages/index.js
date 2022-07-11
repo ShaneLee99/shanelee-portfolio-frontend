@@ -8,7 +8,7 @@ import BlockContent from '@sanity/block-content-to-react'
 
 const Jarallax = dynamic(() => import('../components/Jarallax'), { ssr: false });
 
-const Home = ({
+const home = ({
   portfolios, 
   home_page, 
   Navbar
@@ -159,4 +159,4 @@ export const getServerSideProps = async () => {
   }
 }
 
-export default Home
+export default home

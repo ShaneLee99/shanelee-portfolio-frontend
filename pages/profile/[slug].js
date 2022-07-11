@@ -12,7 +12,7 @@ import BlockContent from '@sanity/block-content-to-react'
 const Jarallax = dynamic(() => import('../../components/Jarallax'), { ssr: false });
 
 
-const Profile = ({ 
+const profile = ({ 
   Account,
   Navbar,
   Portfolios,
@@ -404,4 +404,4 @@ export const getServerSideProps = async (pageContext) => {
   }
 }
 
-export default Profile
+export default profile

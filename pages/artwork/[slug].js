@@ -6,7 +6,7 @@ import Map from "../../components/Map"
 import Link from "next/link"
 import Router from 'next/router'
 
-const Portfolio = ({ 
+const portfolio = ({ 
   portfolio,
   title,
   slug,
@@ -183,4 +183,4 @@ export const getServerSideProps = async (pageContext) => {
   }
 }
 
-export default Portfolio
+export default portfolio

@@ -8,7 +8,7 @@ import BlockContent from '@sanity/block-content-to-react'
 
 const Jarallax = dynamic(() => import('../components/Jarallax'), { ssr: false });
 
-const Blog = ({
+const blog = ({
   blogs,  
   Navbar,
   DateTime
@@ -138,4 +138,4 @@ export const getServerSideProps = async () => {
   }
 }
 
-export default Blog
+export default blog
