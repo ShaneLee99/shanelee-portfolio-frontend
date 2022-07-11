@@ -1,15 +1,10 @@
 import { sanityClient, urlFor } from "../../sanity"
-import React, { useRef, useState } from 'react';
 import { formatSizeUnits } from "../../utils"
-import Image from "../../components/Image"
-import Review from "../../components/Review"
-import Map from "../../components/Map"
-import Link from "next/link"
 import JarallaxImage from '../../components/JarallaxImage';
-import dynamic from 'next/dynamic';
+import Dynamic from 'next/dynamic';
 import BlockContent from '@sanity/block-content-to-react'
 
-const Jarallax = dynamic(() => import('../../components/Jarallax'), { ssr: false });
+const Jarallax = Dynamic(() => import('../../components/Jarallax'), { ssr: false });
 
 
 const profile = ({ 

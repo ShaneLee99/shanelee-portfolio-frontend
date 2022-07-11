@@ -1,13 +1,6 @@
 import { sanityClient, urlFor } from "../../sanity"
 import { useEffect } from 'react'
-import React, { useRef, useState } from 'react';
 import { formatSizeUnits } from "../../utils"
-import Image from "../../components/Image"
-import Review from "../../components/Review"
-import Map from "../../components/Map"
-import Link from "next/link"
-import JarallaxImage from '../../components/JarallaxImage';
-import dynamic from 'next/dynamic';
 import BlockContent from '@sanity/block-content-to-react'
 import Router from 'next/router'
 

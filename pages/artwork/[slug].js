@@ -1,9 +1,5 @@
 import { sanityClient, urlFor } from "../../sanity"
 import { formatSizeUnits } from "../../utils"
-import Image from "../../components/Image"
-import Review from "../../components/Review"
-import Map from "../../components/Map"
-import Link from "next/link"
 import Router from 'next/router'
 
 const portfolio = ({ 

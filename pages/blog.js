@@ -1,12 +1,8 @@
 import { sanityClient, urlFor } from "../sanity"
-import Link from "next/link"
-import dynamic from 'next/dynamic';
-import JarallaxImage from '../components/JarallaxImage';
+import Dynamic from 'next/dynamic';
 import React, { useState } from 'react';
-import { openMenu } from '../header_functions'
-import BlockContent from '@sanity/block-content-to-react'
 
-const Jarallax = dynamic(() => import('../components/Jarallax'), { ssr: false });
+const Jarallax = Dynamic(() => import('../components/Jarallax'), { ssr: false });
 
 const blog = ({
   blogs,  
