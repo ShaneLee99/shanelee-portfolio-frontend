@@ -122,7 +122,7 @@ export const getServerSideProps = async (pageContext) => {
   let cTime = current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
   const dateTime = cDate + ' ' + cTime;
 
-  const query = `*[ _type == "blog" && slug.current == $pageSlug && date > dateTime][0]{
+  const query = `*[ _type == "blog" && slug.current == $pageSlug && date < dateTime][0]{
     title,
     slug,
     owninguser->{
