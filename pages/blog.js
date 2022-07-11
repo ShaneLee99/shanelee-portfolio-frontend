@@ -78,7 +78,7 @@ const blog = ({
             {!blogs?
               <div>
                 <h2 className="text-Text font-poppins font-[800] text-2xl md:text-4xl lg:text-5xl uppercase tracking-wide leading-[1]">No Blogs Found</h2>
-                <div className="border-[1px] my-8 w-max border-Text"></div>
+                <div className="border-[1px] my-8 w-full border-Text"></div>
                 <h2 className="text-Text font-poppins font-[800] lg:text-2xl text-xl text-center uppercase tracking-wide leading-[1]">Sorry!</h2>
               </div>
             :null}
