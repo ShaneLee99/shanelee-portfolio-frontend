@@ -373,7 +373,7 @@ export const getServerSideProps = async (pageContext) => {
   const blog = await sanityClient.fetch(blog_query, { pageSlug })
 
   var fileinfo = account.ResumeFile;
-  const datetime = moment(blog.date).format(("dddd, MMMM Do YYYY, h:mm:ss a")); 
+  const datetime = moment(blog.date).format(("dddd, MMMM Do YYYY, h:mma")); 
 
   if (!fileinfo) {
     fileinfo = null;

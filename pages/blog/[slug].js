@@ -7,23 +7,15 @@ import moment from 'moment'
 
 
 const blogpost = ({ 
-    blog,
     title,
     owninguser,
     post,
     images,
     fileinfo,
     portfolio,
-    datetime,
     currentdate,
-    date
 }) => {
   var Filesize = formatSizeUnits(fileinfo?.size)
-  useEffect(() => {
-    if (blog.date > datetime) {
-        Router.push('/404')
-        }
-  }, [datetime, blog])
   return (
     <div className="bg-Background min-h-screen overflow-x-hidden">
 
@@ -117,11 +109,6 @@ const blogpost = ({
 export const getServerSideProps = async (pageContext) => {
   const pageSlug = pageContext.query.slug
 
-  let current = new Date();
-  let cDate = current.getFullYear() + '-' + (current.getMonth() + 1) + '-' + current.getDate();
-  let cTime = current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
-  const dateTime = cDate + ' ' + cTime;
-
   const query = `*[ _type == "blog" && slug.current == $pageSlug][0]{
     title,
     slug,
@@ -151,7 +138,7 @@ export const getServerSideProps = async (pageContext) => {
 
   const blog = await sanityClient.fetch(query, { pageSlug })
 
-  const datetime = moment(blog.date).format(("dddd, MMMM Do YYYY, h:mm:ss a")); 
+  const datetime = moment(blog.date).format(("dddd, MMMM Do YYYY, h:mm")); 
 
   var raw_blog = blog;
   var blog_title = blog?.title;
@@ -197,7 +184,6 @@ export const getServerSideProps = async (pageContext) => {
       fileinfo: blog_fileinfo,
       portfolio: blog_portfolio,
       date: blog_date,
-      datetime: dateTime,
       currentdate: datetime
     }
   }

@@ -124,19 +124,18 @@ const home = ({
 
               <div className="w-full h-full gap-8 items-start flex flex-wrap transition-all justify-center mt-[2rem]">
                 {Blog?.map((skill) => (
-                  Blog?
                     <a href={`/blog/${skill.slug.current}`} className="w-full md:max-w-4xl max-w-md h-44 bg-SecondryBackground rounded-xl flex items-center md:p-8 p-4 hover:scale-[0.98] transition-all">
                       <img src={urlFor(skill.image)} className="md:w-[100px] md:h-[100px] h-[75px] w-[75px] rounded-full"></img>
                       <div className="text-Text ml-5">
                         <h2 className="font-[500] text-xl font-poppins">{skill.title}</h2>
                         <div className="font-[300] md:text-base text-xs mt-2 text-Text font-rubik flex md:flex-row flex-col md:space-y-0 space-y-2">
-                          <p className="mr-2">Posted: {DateTime}</p>
+                          <p className="mr-2">Posted: {moment(skill.date).format(("dddd, MMMM Do YYYY, h:mma")) }</p>
                           {skill.portfolio.title?<p className="md:flex hidden mr-2">/</p>:null}
                           {skill.portfolio.title?<p className="">Portfolio Refrence: {skill.portfolio.title}</p>:null}
                         </div>
                       </div>
                     </a>
-              :null))}
+                ))}
               </div>
 
             </div>
@@ -188,7 +187,7 @@ export const getServerSideProps = async () => {
 
   const blog = await sanityClient.fetch(blog_query)
 
-  const datetime = moment(blog.date).format(("dddd, MMMM Do YYYY, h:mm:ss a")); 
+  const datetime = moment(blog.date).format(("dddd, MMMM Do YYYY, h:mma"));
 
 
   if (!portfolios.length || !blog.length) {
