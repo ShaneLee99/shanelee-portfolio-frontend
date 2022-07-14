@@ -142,7 +142,7 @@ const profile = ({
           </div>
         </a>
 
-        <a href="#" className="mt-10 bg-FirstColour border-2 border-FirstColour hover:bg-transparent text-Text hover:text-FirstColour h-10 w-32 flex items-center justify-center rounded-lg transition-all">
+        <a href="/blog" className="mt-10 bg-FirstColour border-2 border-FirstColour hover:bg-transparent text-Text hover:text-FirstColour h-10 w-32 flex items-center justify-center rounded-lg transition-all">
             <h2>View All Posts</h2>
         </a>
       </div>
