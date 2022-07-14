@@ -57,18 +57,20 @@ const portfolio = ({
         :null}
 
         {file?
-          <div className="max-w-[30rem] h-auto rounded-lg space-y-4 mt-10  flex flex-col text-center break-words">
-          
-              <a href={`${FileURL.url}`} download className="flex w-[24rem] h-20 bg-SecondryColour border-2 border-SecondryColour group hover:bg-transparent transition-all p-4 rounded-lg items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 transition-all text-Text group-hover:text-SecondryColour" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
 
-                <div className="flex flex-col text-Text group-hover:text-SecondryColour ml-2">
+          <div className="max-w-[30rem] h-auto rounded-lg space-y-4 mt-10  flex flex-col text-center break-words">
+                      
+          <a href={FileURL?.url} download className="flex max-w-[30rem] h-16 bg-SecondryColour border-2 border-SecondryColour group hover:bg-transparent transition-all p-8 rounded-lg items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 transition-all text-Text group-hover:text-SecondryColour" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+
+              <div className="flex flex-col text-Text group-hover:text-SecondryColour ml-2">
                   <p className="font-[600] text-lg text-left transition-all">{FileURL?.originalFilename}</p>
                   <p className="font-[300] text-left transition-all">{Filesize}</p>
-                </div>
-              </a>
+              </div>
+          </a>
+
           </div>
         :null}
 
