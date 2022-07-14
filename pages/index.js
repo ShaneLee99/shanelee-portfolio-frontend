@@ -113,13 +113,13 @@ const home = ({
 
           :null}
 
-        {blogs_exist?
+        {Blog?
           
           <div id="blogs" className="bg-Background flex justify-center">
 
             <div className="py-20 flex flex-col items-center px-10 md:px-[4rem] lg:px-40 xl:px-60">
 
-            <h2 className="text-Text font-poppins font-[800] text-2xl md:text-4xl lg:text-5xl uppercase tracking-wide leading-[1]">{home_page[0].portfoliotitle}</h2>
+            <h2 className="text-Text font-poppins font-[800] text-2xl md:text-4xl lg:text-5xl uppercase tracking-wide leading-[1]">{home_page[0].blogtitle}</h2>
               <div className="border-[1px] mt-8 mb-[5rem] w-64 border-Text"></div>
 
               <div className="w-full h-full gap-8 items-start flex flex-wrap transition-all justify-center mt-[2rem]">
@@ -188,7 +188,7 @@ export const getServerSideProps = async () => {
 
   const blog = await sanityClient.fetch(blog_query)
 
-  const datetime = moment(blogs.date).format(("dddd, MMMM Do YYYY, h:mm:ss a")); 
+  const datetime = moment(blog.date).format(("dddd, MMMM Do YYYY, h:mm:ss a")); 
 
 
   if (!portfolios.length || !blog.length) {
