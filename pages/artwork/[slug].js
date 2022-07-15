@@ -22,7 +22,7 @@ const portfolio = ({
 
       <Head>
         <title>{DomainName} - {portfolio.title}</title>
-        <link rel="shortcut icon" href={urlFor(header.headerlogo)} />
+        <link rel="shortcut icon" href={urlFor(header.headerlogo)} />,
       </Head>
 
       <button onClick={() => Router.back()} className="absolute flex md:top-10 md:left-10 top-3 left-3 w-auto md:h-12 h-6 items-center md:space-x-4 space-x-2 group transition-all">

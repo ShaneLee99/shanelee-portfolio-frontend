@@ -18,7 +18,7 @@ const blog = ({
 
           <Head>
             <title>{DomainName} - Blogs</title>
-            <link rel="shortcut icon" href={urlFor(header.headerlogo)} />
+            <link rel="shortcut icon" href={urlFor(navbar.headerlogo)} />
           </Head>
 
  
@@ -130,11 +130,6 @@ export const getServerSideProps = async (pageContext) => {
 
   const DomainName = pageContext.req.headers.host
 
-  const header_query = `*[_type == "header"][0]{
-    headerlogo
-  }`
-  const header = await sanityClient.fetch(header_query)
-
   if (!blogs.length) {
     return {
       props: {
@@ -148,8 +143,7 @@ export const getServerSideProps = async (pageContext) => {
         blogs,
         Navbar: navbar,
         DateTime: datetime,
-        DomainName,
-        navbar
+        DomainName
       },
     }
   }
