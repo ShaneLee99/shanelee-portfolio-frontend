@@ -2,16 +2,24 @@ import { sanityClient, urlFor } from "../sanity"
 import Dynamic from 'next/dynamic'
 import React, { useState } from 'react'
 import moment from 'moment'
+import Head from 'next/head'
 
 const Jarallax = Dynamic(() => import('../components/Jarallax'), { ssr: false });
 
 const blog = ({
   blogs,  
   Navbar,
-  DateTime
+  DateTime,
+  DomainName,
+  navbar
 }) => {
   return (
         <div className="main">
+
+          <Head>
+            <title>{DomainName} - Blogs</title>
+            <link rel="shortcut icon" href={urlFor(header.headerlogo)} />
+          </Head>
 
  
 
@@ -88,7 +96,7 @@ const blog = ({
         </div>
 )}
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (pageContext) => {
   let current = new Date();
   let cDate = current.getFullYear() + '-' + (current.getMonth() + 1) + '-' + current.getDate();
   let cTime = current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
@@ -120,6 +128,13 @@ export const getServerSideProps = async () => {
 
   const datetime = moment(blogs.date).format(("dddd, MMMM Do YYYY, h:mm:ss a")); 
 
+  const DomainName = pageContext.req.headers.host
+
+  const header_query = `*[_type == "header"][0]{
+    headerlogo
+  }`
+  const header = await sanityClient.fetch(header_query)
+
   if (!blogs.length) {
     return {
       props: {
@@ -132,7 +147,9 @@ export const getServerSideProps = async () => {
       props: {
         blogs,
         Navbar: navbar,
-        DateTime: datetime
+        DateTime: datetime,
+        DomainName,
+        navbar
       },
     }
   }

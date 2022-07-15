@@ -4,6 +4,7 @@ import JarallaxImage from '../../components/JarallaxImage';
 import Dynamic from 'next/dynamic';
 import BlockContent from '@sanity/block-content-to-react'
 import moment from 'moment'
+import Head from 'next/head'
 
 const Jarallax = Dynamic(() => import('../../components/Jarallax'), { ssr: false });
 
@@ -14,11 +15,18 @@ const profile = ({
   Portfolios,
   ResumeFile,
   Blog,
-  DateTime
+  DateTime,
+  DomainName,
+  header
 }) => {
   var Filesize = formatSizeUnits(ResumeFile?.size)
   return (
     <div className="bg-Background overflow-x-hidden">
+
+      <Head>
+        <title>{DomainName} - {Account.name}</title>
+        <link rel="shortcut icon" href={urlFor(Navbar.headerlogo)} />
+      </Head>
 
         <div className="absolute top-0 left-0 w-full h-16 bg-clip-padding backdrop-blur-xl bg-opacity-50 bg-Background z-[420] flex items-center xl:px-40 lg:px-32 md:px-20 px-8 transition-all">
             
@@ -327,6 +335,7 @@ const profile = ({
 
 export const getServerSideProps = async (pageContext) => {
   const pageSlug = pageContext.query.slug
+  const DomainName = pageContext.req.headers.host
 
   const query = `*[ _type == "account" && slug.current == $pageSlug][0]{
     name,
@@ -392,7 +401,8 @@ export const getServerSideProps = async (pageContext) => {
         Portfolios: portfolios,
         ResumeFile: fileinfo,
         Blog: blog,
-        DateTime: datetime
+        DateTime: datetime,
+        DomainName,
       }
     }
   }

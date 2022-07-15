@@ -1,6 +1,7 @@
 import { sanityClient, urlFor } from "../../sanity"
 import { formatSizeUnits } from "../../utils"
 import Router from 'next/router'
+import Head from 'next/head'
 
 const portfolio = ({ 
   portfolio,
@@ -11,11 +12,18 @@ const portfolio = ({
   user,
   desc,
   file,
-  FileURL
+  FileURL,
+  DomainName,
+  header
 }) => {
   var Filesize = formatSizeUnits(FileURL?.size)
   return (
     <div className="bg-Background min-h-screen overflow-x-hidden">
+
+      <Head>
+        <title>{DomainName} - {portfolio.title}</title>
+        <link rel="shortcut icon" href={urlFor(header.headerlogo)} />
+      </Head>
 
       <button onClick={() => Router.back()} className="absolute flex md:top-10 md:left-10 top-3 left-3 w-auto md:h-12 h-6 items-center md:space-x-4 space-x-2 group transition-all">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-full text-Text transition-all group-hover:text-FirstColour w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -105,6 +113,7 @@ const portfolio = ({
 
 export const getServerSideProps = async (pageContext) => {
   const pageSlug = pageContext.query.slug
+  const DomainName = pageContext.req.headers.host
 
   const query = `*[ _type == "portfolio" && slug.current == $pageSlug][0]{
     title,
@@ -126,6 +135,11 @@ export const getServerSideProps = async (pageContext) => {
   }`
 
   const portfolio = await sanityClient.fetch(query, { pageSlug })
+
+  const header_query = `*[_type == "header"][0]{
+    headerlogo
+  }`
+  const header = await sanityClient.fetch(header_query)
 
 
   var raw_portfolio = portfolio;
@@ -176,7 +190,9 @@ export const getServerSideProps = async (pageContext) => {
       user: owninguser,
       desc: description,
       file: file,
-      FileURL: fileinfo
+      FileURL: fileinfo,
+      DomainName,
+      header
     }
   }
 }

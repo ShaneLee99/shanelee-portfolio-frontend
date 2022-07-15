@@ -4,6 +4,7 @@ import { formatSizeUnits } from "../../utils"
 import BlockContent from '@sanity/block-content-to-react'
 import Router from 'next/router'
 import moment from 'moment'
+import Head from 'next/head'
 
 
 const blogpost = ({ 
@@ -14,10 +15,17 @@ const blogpost = ({
     fileinfo,
     portfolio,
     currentdate,
+    DomainName,
+    navbar
 }) => {
   var Filesize = formatSizeUnits(fileinfo?.size)
   return (
     <div className="bg-Background min-h-screen overflow-x-hidden">
+
+      <Head>
+        <title>{DomainName} - {title}</title>
+        <link rel="shortcut icon" href={urlFor(header.headerlogo)} />
+      </Head>
 
       <button onClick={() => Router.back()} className="absolute flex md:top-10 md:left-10 top-3 left-3 w-auto md:h-12 h-6 items-center md:space-x-4 space-x-2 group transition-all">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-full text-Text transition-all group-hover:text-FirstColour w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -108,6 +116,7 @@ const blogpost = ({
 
 export const getServerSideProps = async (pageContext) => {
   const pageSlug = pageContext.query.slug
+  const DomainName = pageContext.req.headers.host
 
   const query = `*[ _type == "blog" && slug.current == $pageSlug][0]{
     title,
@@ -137,6 +146,11 @@ export const getServerSideProps = async (pageContext) => {
   }`
 
   const blog = await sanityClient.fetch(query, { pageSlug })
+
+  const header_query = `*[_type == "header"][0]{
+    headerlogo
+  }`
+  const header = await sanityClient.fetch(header_query)
 
   const datetime = moment(blog.date).format(("dddd, MMMM Do YYYY, h:mm")); 
 
@@ -184,7 +198,9 @@ export const getServerSideProps = async (pageContext) => {
       fileinfo: blog_fileinfo,
       portfolio: blog_portfolio,
       date: blog_date,
-      currentdate: datetime
+      currentdate: datetime,
+      DomainName,
+      navbar
     }
   }
 }

@@ -2,6 +2,7 @@ import { sanityClient, urlFor } from "../sanity"
 import Dynamic from 'next/dynamic';
 import JarallaxImage from '../components/JarallaxImage';
 import moment from 'moment'
+import Head from 'next/head'
 
 const Jarallax = Dynamic(() => import('../components/Jarallax'), { ssr: false });
 
@@ -10,10 +11,16 @@ const home = ({
   home_page, 
   Navbar,
   Blog,
-  DateTime
+  DateTime,
+  DomainName
 }) => {
   return (
         <div className="main">
+
+          <Head>
+            <title>{DomainName} - Home</title>
+            <link rel="shortcut icon" href={urlFor(Navbar.headerlogo)} />
+          </Head>
 
  
 
@@ -96,7 +103,7 @@ const home = ({
                 <div className="w-full h-full gap-8 items-start flex flex-wrap transition-all justify-center mt-[2rem]">
                     {portfolios.map((portfolio) => (
                       portfolio.thumbnail && portfolio.title && portfolio.owninguser.name?
-                        <a href={`/artwork/${portfolio.slug.current}`} className="w-full md:w-[49%] h-full lg:w-[24%] hover:scale-[0.95] transition-all relative group rounded-xl flex flex-col items-center justify-center overflow-hidden">       
+                        <a href={`/artwork/${portfolio.slug.current}`} className="w-[49%] h-full lg:w-[24%] hover:scale-[0.95] h-auto transition-all relative group rounded-xl flex flex-col items-center justify-center overflow-hidden">       
                             <img className="w-full h-full transition-all" src={urlFor(portfolio.thumbnail.image)} />
                             <div className="absolute bottom-0 left-0 w-full items-center justify-center transition-colors h-[50%] from-transparent via-Background/50 to-Background/70 group-hover:bg-gradient-to-b flex flex-col">
                                 <p className="font-rubik group-hover:text-Text font-[600] text-transparent text-lg">{portfolio.title}</p>
@@ -146,7 +153,7 @@ const home = ({
         </div>
 )}
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (pageContext) => {
 
   const query = `*[_type == "portfolio"]{
     title,
@@ -189,6 +196,8 @@ export const getServerSideProps = async () => {
 
   const datetime = moment(blog.date).format(("dddd, MMMM Do YYYY, h:mma"));
 
+  const DomainName = pageContext.req.headers.host
+
 
   if (!portfolios.length || !blog.length) {
     return {
@@ -197,7 +206,8 @@ export const getServerSideProps = async () => {
         home_page,
         Navbar: navbar,
         Blog: blog,
-        DateTime: datetime
+        DateTime: datetime,
+        DomainName
       },
     }
   } else {
@@ -207,7 +217,8 @@ export const getServerSideProps = async () => {
         home_page,
         Navbar: navbar,
         Blog: blog,
-        DateTime: datetime
+        DateTime: datetime,
+        DomainName
       },
     }
   }
