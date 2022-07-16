@@ -11,14 +11,14 @@ const blog = ({
   Navbar,
   DateTime,
   DomainName,
-  navbar
+  Navbar
 }) => {
   return (
         <div className="main">
 
           <Head>
             <title>{DomainName} - Blogs</title>
-            <link rel="shortcut icon" href={urlFor(navbar.headerlogo)} />
+            <link rel="shortcut icon" href={urlFor(Navbar.headerlogo)} />
           </Head>
 
  
