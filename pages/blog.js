@@ -10,8 +10,7 @@ const blog = ({
   blogs,  
   Navbar,
   DateTime,
-  DomainName,
-  Navbar
+  DomainName
 }) => {
   return (
         <div className="main">
