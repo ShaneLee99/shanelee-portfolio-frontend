@@ -14,7 +14,8 @@ const portfolio = ({
   file,
   FileURL,
   DomainName,
-  header
+  header,
+  Navbar
 }) => {
   var Filesize = formatSizeUnits(FileURL?.size)
   return (
@@ -25,12 +26,48 @@ const portfolio = ({
         <link rel="shortcut icon" href={urlFor(header.headerlogo)} />,
       </Head>
 
-      <button onClick={() => Router.back()} className="absolute flex md:top-10 md:left-10 top-3 left-3 w-auto md:h-12 h-6 items-center md:space-x-4 space-x-2 group transition-all">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-full text-Text transition-all group-hover:text-FirstColour w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
-        </svg>
-        <p className="text-Text group-hover:text-FirstColour transition-all font-rubik">Go Back</p>
-      </button>
+      <div className="absolute top-0 left-0 w-full h-16 bg-clip-padding backdrop-blur-xl bg-opacity-50 bg-Background z-[420] flex items-center xl:px-40 lg:px-32 md:px-20 px-8 transition-all">
+            
+
+            {Navbar?.headerlogo?
+              <a href="/"><img className="max-h-10" alt={Navbar.headerlogoalt} src={urlFor(Navbar.headerlogo)} /></a>
+            :
+            <a href="/" className="text-Text font-poppins font-[600] text-lg">{Navbar.headerlogoalt}</a>}
+          
+            <div className="flex-grow"></div>
+
+            <div className="space-x-5 md:flex hidden">
+                {Navbar.directorys.map(( data ) => (
+                <a href={data.href} className="text-Text transition-all hover:text-FirstColour font-rubik font-[300] text-lg">{data.title}</a>
+                ))}
+            </div>
+
+            <button onClick={() => {document.getElementById("mobile_menu").style.display = "flex";}} className="flex md:hidden">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-Text transition-all hover:text-FirstColour" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            
+
+              
+        </div>
+
+        <div id="mobile_menu" className="bg-SecondryBackground fixed top-0 left-0 w-full h-screen hidden z-[999]">
+              <div className="flex w-full h-full relative">
+                  <button onClick={() => {document.getElementById("mobile_menu").style.display = "none";}} className="absolute top-5 right-5 ">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-Text transition-all hover:text-FirstColour" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+
+                  <div className="flex flex-col items-center justify-center w-full h-full">
+                    {Navbar.directorys.map(( data ) => (
+                      <a href={data.href} className="text-Text transition-all p-4 w-full text-center hover:text-FirstColour font-rubik font-[300] text-xl">{data.title}</a>
+                    ))}
+                  </div>
+              </div>
+            </div>
 
       
       <div id="canvas" className="fixed w-full hidden min-h-screen h-full top-0 z-[999] left-0 overflow-hidden bg-Background items-center justify-center">
@@ -45,7 +82,7 @@ const portfolio = ({
 
 
 
-      <div className="py-20 flex flex-col items-center px-10 md:px-[4rem] lg:px-40">
+      <div className="py-32 flex flex-col items-center px-10 md:px-[4rem] lg:px-40">
 
         <div className="flex flex-col items-center w-full lg:max-w-[50%] md:max-w-[75%]">
           {title?<h2 className="text-Text font-poppins font-[800] text-2xl md:text-4xl text-center lg:text-5xl uppercase tracking-wide leading-[1]">{title}</h2>:null}
@@ -134,6 +171,14 @@ export const getServerSideProps = async (pageContext) => {
     }
   }`
 
+  const nav_query = `*[_type == "header" && header == "Header"][0]{
+    headerlogoalt,
+    headerlogo,
+    directorys
+  }`
+
+  const Navbar = await sanityClient.fetch(nav_query)
+
   const portfolio = await sanityClient.fetch(query, { pageSlug })
 
   const header_query = `*[_type == "header"][0]{
@@ -192,7 +237,8 @@ export const getServerSideProps = async (pageContext) => {
       file: file,
       FileURL: fileinfo,
       DomainName,
-      header
+      header,
+      Navbar
     }
   }
 }
