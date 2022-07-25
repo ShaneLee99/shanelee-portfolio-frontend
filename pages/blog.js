@@ -33,7 +33,8 @@ const blog = ({
 
               <div className="space-x-5 md:flex hidden">
                   {Navbar.directorys.map(( data ) => (
-                  <a href={data.href} className="text-Text transition-all hover:text-FirstColour font-rubik font-[300] text-lg">{data.title}</a>
+                    data.title?
+                    <a href={data.href} className="text-Text transition-all hover:text-FirstColour font-rubik font-[300] text-lg">{data.title}</a>:null
                   ))}
               </div>
 
@@ -56,7 +57,8 @@ const blog = ({
 
                 <div className="flex flex-col items-center justify-center w-full h-full">
                   {Navbar.directorys.map(( data ) => (
-                    <a href={data.href} className="text-Text transition-all p-4 w-full text-center hover:text-FirstColour font-rubik font-[300] text-xl">{data.title}</a>
+                    data.title?
+                    <a href={data.href} className="text-Text transition-all p-4 w-full text-center hover:text-FirstColour font-rubik font-[300] text-xl">{data.title}</a>:null
                   ))}
                 </div>
             </div>
@@ -68,13 +70,13 @@ const blog = ({
           <div className="w-screen h-screen bg-Background pt-40 p-4 flex items-center flex-col space-y-5">
           
             {blogs?.map((skill) => (
-              blogs?
+              skill?
                 <a href={`/blog/${skill.slug.current}`} className="w-full md:max-w-4xl max-w-md h-44 bg-SecondryBackground rounded-xl flex items-center md:p-8 p-4 hover:scale-[0.98] transition-all">
                   <img src={urlFor(skill.image)} className="md:w-[100px] md:h-[100px] h-[75px] w-[75px] rounded-full"></img>
                   <div className="text-Text ml-5">
-                    <h2 className="font-[500] text-xl font-poppins">{skill.title}</h2>
+                    {skill.title?<h2 className="font-[500] text-xl font-poppins">{skill.title}</h2>:null}
                     <div className="font-[300] md:text-base text-xs mt-2 text-Text font-rubik flex md:flex-row flex-col md:space-y-0 space-y-2">
-                      <p className="mr-2">Posted: {DateTime}</p>
+                      {DateTime?<p className="mr-2">Posted: {DateTime}</p>:null}
                       {skill.portfolio.title?<p className="md:flex hidden mr-2">/</p>:null}
                       {skill.portfolio.title?<p className="">Portfolio Refrence: {skill.portfolio.title}</p>:null}
                     </div>
