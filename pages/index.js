@@ -35,7 +35,7 @@ const home = ({
 
               <div className="space-x-5 md:flex hidden">
                   {Navbar.directorys.map(( data ) => (
-                  <a href={data.href} className="text-Text transition-all hover:text-FirstColour font-rubik font-[300] text-lg">{data.title}</a>
+                  data.title?<a href={data.href} className="text-Text transition-all hover:text-FirstColour font-rubik font-[300] text-lg">{data.title}</a>:null
                   ))}
               </div>
 
@@ -58,7 +58,7 @@ const home = ({
 
                     <div className="flex flex-col items-center justify-center w-full h-full">
                       {Navbar.directorys.map(( data ) => (
-                        <a href={data.href} className="text-Text transition-all p-4 w-full text-center hover:text-FirstColour font-rubik font-[300] text-xl">{data.title}</a>
+                        data.title?<a href={data.href} className="text-Text transition-all p-4 w-full text-center hover:text-FirstColour font-rubik font-[300] text-xl">{data.title}</a>:null
                       ))}
                     </div>
                 </div>
@@ -120,7 +120,7 @@ const home = ({
 
           :null}
 
-        {Blog?
+        {Blog && home_page[0].blogtitle?
           
           <div id="blogs" className="bg-Background flex justify-center">
 
