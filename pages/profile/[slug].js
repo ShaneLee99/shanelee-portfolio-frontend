@@ -40,7 +40,8 @@ const profile = ({
 
             <div className="space-x-5 md:flex hidden">
                 {Navbar.directorys.map(( data ) => (
-                <a href={data.href} className="text-Text transition-all hover:text-FirstColour font-rubik font-[300] text-lg">{data.title}</a>
+                  data.title?
+                <a href={data.href} className="text-Text transition-all hover:text-FirstColour font-rubik font-[300] text-lg">{data.title}</a>:null
                 ))}
             </div>
 
@@ -65,7 +66,7 @@ const profile = ({
 
                   <div className="flex flex-col items-center justify-center w-full h-full">
                     {Navbar.directorys.map(( data ) => (
-                      <a href={data.href} className="text-Text transition-all p-4 w-full text-center hover:text-FirstColour font-rubik font-[300] text-xl">{data.title}</a>
+                      data.title?<a href={data.href} className="text-Text transition-all p-4 w-full text-center hover:text-FirstColour font-rubik font-[300] text-xl">{data.title}</a>:null
                     ))}
                   </div>
               </div>
@@ -92,7 +93,7 @@ const profile = ({
                     <a href={button.href} className="md:w-[4rem] md:h-[4rem] w-[2.75rem] h-[2.75rem] border-2 border-SecondryBackground hover:border-FirstColour hover:scale-[1.2] flex items-center justify-center rounded-full bg-SecondryBackground transition-all">
                       <img className="md:w-[2rem] md:h-[2rem] w-7 h-7" src={urlFor(button.image)} />
                     </a>
-                  :<div></div>
+                  :null
                 ))}
               </div>
 
@@ -191,7 +192,7 @@ const profile = ({
 
               <div className="bg-SecondryBackground rounded w-full flex flex-col lg:flex-row lg:h-16 py-2">
 
-                  {Account.aboutme.hiring.map((hiring) => (
+                  {Account?.aboutme?.hiring?.map((hiring) => (
                       <div className="px-4 py-2 rounded-lg mr-[8px] transition-all flex items-center md:text-base text-sm whitespace-nowrap">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-SecondryColour transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
