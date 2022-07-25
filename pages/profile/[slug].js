@@ -139,9 +139,9 @@ const profile = ({
         <div className="border-[1px] my-8 w-64 border-Text"></div>
 
         <a href={`/blog/${Blog.slug.current}`} className="w-full md:max-w-4xl max-w-md h-44 bg-SecondryBackground rounded-xl flex items-center md:p-8 p-4 hover:scale-[0.98] transition-all">
-          <img src={urlFor(Blog.image)} className="md:w-[100px] md:h-[100px] h-[75px] w-[75px] rounded-full"></img>
+          {Blog.image?<img src={urlFor(Blog.image)} className="md:w-[100px] md:h-[100px] h-[75px] w-[75px] rounded-full"></img>:null}
           <div className="text-Text ml-5">
-            <h2 className="font-[500] text-xl font-poppins">{Blog.title}</h2>
+            {Blog.title?<h2 className="font-[500] text-xl font-poppins">{Blog.title}</h2>:null}
             <div className="font-[300] md:text-base text-xs mt-2 text-Text font-rubik flex md:flex-row flex-col md:space-y-0 space-y-2">
               <p className="mr-2">Posted: {DateTime}</p>
               {Blog.portfolio.title?<p className="md:flex hidden mr-2">/</p>:null}
