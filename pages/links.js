@@ -65,8 +65,7 @@ Navbar
 
 
                     {links?.map((link) => (
-
-                        <a href={link.href} className="bg-SecondryColour w-full h-16 rounded-lg group flex items-center justify-center border-2 border-SecondryColour hover:bg-transparent transition-all hover:scale-[0.95]">
+                        <a href={link.href} key={link.id} className="bg-SecondryColour w-full h-16 rounded-lg group flex items-center justify-center border-2 border-SecondryColour hover:bg-transparent transition-all hover:scale-[0.95]">
                             <img className="w-[30px] h-[30px] mr-2" src={urlFor(link.image)}></img>
                             <h3 className="text-Text font-rubik group-hover:text-SecondryColour transition-all cursor-default uppercase">{link.buttontitle}</h3>
                         </a>
