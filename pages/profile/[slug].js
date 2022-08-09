@@ -280,7 +280,7 @@ const profile = ({
       </div>
     :null}
 
-    {Account.contactme || Account.links?
+    {Account.contactme ?
 
       <div id="contactme" className="mt-20 flex flex-col items-center px-20">
         <h2 className="text-Text font-poppins font-[800] text-2xl md:text-4xl lg:text-5xl uppercase tracking-wide leading-[1]">Contact Me</h2>
