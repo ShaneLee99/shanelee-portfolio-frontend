@@ -87,15 +87,17 @@ const profile = ({
               <h2 className="text-Text text-center font-poppins font-[800] text-2xl md:text-4xl lg:text-5xl uppercase tracking-wide leading-[1]">{Account.name}</h2>
               <h2 className="text-Text text-center font-poppins font-[400] text-xl md:text-2xl uppercase tracking-wide leading-[1]">{Account.desc}</h2>
               
-              <div className="flex md:space-x-5 space-x-3">
-                {Account.links.map((button) => (
-                  button.image && button.href?
-                    <a href={button.href} className="md:w-[4rem] md:h-[4rem] w-[2.75rem] h-[2.75rem] border-2 border-SecondryBackground hover:border-FirstColour hover:scale-[1.2] flex items-center justify-center rounded-full bg-SecondryBackground transition-all">
-                      <img className="md:w-[2rem] md:h-[2rem] w-7 h-7" src={urlFor(button.image)} />
-                    </a>
-                  :null
-                ))}
-              </div>
+              {Account.links?
+                <div className="flex md:space-x-5 space-x-3">
+                  {Account.links.map((button) => (
+                    button.image && button.href?
+                      <a href={button.href} className="md:w-[4rem] md:h-[4rem] w-[2.75rem] h-[2.75rem] border-2 border-SecondryBackground hover:border-FirstColour hover:scale-[1.2] flex items-center justify-center rounded-full bg-SecondryBackground transition-all">
+                        <img className="md:w-[2rem] md:h-[2rem] w-7 h-7" src={urlFor(button.image)} />
+                      </a>
+                    :null
+                  ))}
+                </div>
+              :null}
 
             </div>
 
