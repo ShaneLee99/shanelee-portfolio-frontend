@@ -3,6 +3,7 @@ import Dynamic from 'next/dynamic';
 import JarallaxImage from '../components/JarallaxImage';
 import moment from 'moment'
 import Head from 'next/head'
+import Footer from '../components/Footer'
 
 const Jarallax = Dynamic(() => import('../components/Jarallax'), { ssr: false });
 
@@ -150,6 +151,7 @@ const home = ({
           </div>
 
         :null}
+        <Footer />
         </div>
 )}
 
