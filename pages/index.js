@@ -151,7 +151,6 @@ const home = ({
           </div>
 
         :null}
-        <Footer />
         </div>
 )}
 
