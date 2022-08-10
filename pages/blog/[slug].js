@@ -69,7 +69,7 @@ const blogpost = ({
           {title?<h2 className="text-Text font-poppins font-[800] text-2xl md:text-4xl text-center lg:text-5xl uppercase tracking-wide leading-[1]">{title}</h2>:null}
           {title?<h2 className="text-Text font-poppins font-[400] text-base text-center mt-5">{currentdate}</h2>:null}
           {owninguser?
-            <a href={`/profile/${owninguser.slug.current}`} className="flex items-center group transition-all mt-10">
+            <a href={`/profile/`} className="flex items-center group transition-all mt-10">
                 <img className="w-14 h-14 rounded-full border-Text transition-all border-2 group-hover:border-FirstColour" src={urlFor(owninguser.image)} />
                 <h1 className="text-Text pl-4 font-rubik text-lg transition-all group-hover:text-FirstColour">{owninguser.name}</h1>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 pl-1 text-FirstColour" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

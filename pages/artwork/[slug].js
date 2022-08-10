@@ -92,7 +92,7 @@ const portfolio = ({
         {title || desc?<div className="border-[1px] my-8 w-64 border-Text"></div>:null}
 
         {user?
-          <a href={`/profile/${user.slug.current}`} className="flex items-center group transition-all">
+          <a href={`/profile/`} className="flex items-center group transition-all">
             <img className="w-14 h-14 rounded-full border-Text transition-all border-2 group-hover:border-FirstColour" src={urlFor(user.image)} />
             <h1 className="text-Text pl-4 font-rubik text-lg transition-all group-hover:text-FirstColour">{user.name}</h1>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 pl-1 text-FirstColour" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

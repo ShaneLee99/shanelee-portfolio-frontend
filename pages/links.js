@@ -1,16 +1,18 @@
 import { sanityClient, urlFor } from "../sanity"
 import Dynamic from 'next/dynamic';
 import Head from 'next/head'
+import JarallaxImage from '../components/JarallaxImage';
 
 const Jarallax = Dynamic(() => import('../components/Jarallax'), { ssr: false });
 
 const Links = ({
 links,
 DomainName,
-Navbar
+Navbar,
+Account
 }) => {
   return (
-        <div className="main bg-Background">
+        <div className="main bg-Background overflow-x-hidden">
 
             <Head>
                 <title>{DomainName} - Links</title>
@@ -57,17 +59,32 @@ Navbar
                 </div>
               </div>
 
-            <div className="w-screen h-screen pt-32 flex flex-col items-center">
-                <h2 className="text-Text font-poppins font-[800] text-2xl md:text-4xl lg:text-5xl uppercase tracking-wide leading-[1]">Links</h2>
-                <div className="border-[1px] mt-8 mb-8 w-64 border-Text"></div>
+              <div className="h-16 w-full flex bg-SecondryBackground"></div>
 
+              <Jarallax className="w-full h-[25rem] bg-cover bg-center jarallax" speed={0.5}>
+
+                    <JarallaxImage className="h-[30rem]" src={urlFor(Account.banner)} alt="" />
+
+                    <div className="w-full h-full bg-opacity-30 bg-Background space-y-4 flex flex-col items-center justify-center">
+
+                      <div className="w-40 h-40 rounded-full mb-2 p-1 bg-Text flex items-center justify-center">
+                        <img className="rounded-full" src={urlFor(Account.image)}/>
+                      </div>
+
+                      <h2 className="text-Text text-center font-poppins font-[800] text-2xl md:text-4xl lg:text-5xl uppercase tracking-wide leading-[1]">{Account.name}</h2>
+                      <h2 className="text-Text text-center font-poppins font-[400] text-xl md:text-2xl uppercase tracking-wide leading-[1]">{Account.desc}</h2>
+
+                    </div>
+
+              </Jarallax>
+
+            <div className="w-screen h-screen pt-10 flex flex-col items-center">
+                
                 <div className="max-w-lg w-full flex flex-col items-center space-y-5 mt-5">
-
-
-                    {links?.map((link) => (
-                        <a href={link.href} key={link.id} className="bg-SecondryColour w-full h-16 rounded-lg group flex items-center justify-center border-2 border-SecondryColour hover:bg-transparent transition-all hover:scale-[0.95]">
-                            <img className="w-[30px] h-[30px] mr-2" src={urlFor(link.image)}></img>
-                            <h3 className="text-Text font-rubik group-hover:text-SecondryColour transition-all cursor-default uppercase">{link.buttontitle}</h3>
+                    {links?.map((link, _key) => (
+                        <a href={link.href} key={_key} className="bg-FirstColour w-full h-16 rounded-lg group flex items-center justify-center border-2 border-FirstColour hover:bg-transparent transition-all hover:scale-[0.95]">
+                            <img className="w-auto h-[25px] mr-2" src={urlFor(link.image)}></img>
+                            <h3 className="text-Text font-rubik group-hover:text-FirstColour transition-all cursor-default uppercase">{link.buttontitle}</h3>
                         </a>
 
                     ))}
@@ -87,7 +104,15 @@ export const getServerSideProps = async (pageContext) => {
     
     const DomainName = pageContext.req.headers.host
 
-    const query = `*[_type == "linkspage"]{
+    const accquery = `*[ _type == "account"][0]{
+      name,
+      desc,
+      image,
+      banner,
+      slug
+    }`
+  
+    const query = `*[_type == "linkspage"]|order(orderRank){
       buttontitle,
       image,
       href
@@ -100,13 +125,15 @@ export const getServerSideProps = async (pageContext) => {
       directorys
     }`
     const navbar = await sanityClient.fetch(nav_query)
+    const accountinfo = await sanityClient.fetch(accquery)
   
     if (!Links.length) {
       return {
         props: {
           links: [],
           DomainName,
-          Navbar: navbar
+          Navbar: navbar,
+          Account: accountinfo
         },
       }
     } else {
@@ -114,7 +141,8 @@ export const getServerSideProps = async (pageContext) => {
         props: {
           links,
           DomainName,
-          Navbar: navbar
+          Navbar: navbar,
+          Account: accountinfo
         },
       }
     }
