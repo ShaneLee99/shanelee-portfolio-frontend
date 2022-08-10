@@ -83,8 +83,8 @@ Account
                 <div className="max-w-lg w-full flex flex-col items-center space-y-5 mt-5">
                     {links?.map((link, _key) => (
                         <a href={link.href} key={_key} className="bg-FirstColour w-full h-16 rounded-lg group flex items-center justify-center border-2 border-FirstColour hover:bg-transparent transition-all hover:scale-[0.95]">
-                            <img className="w-auto h-[25px] mr-2" src={urlFor(link.image)}></img>
-                            <h3 className="text-Text font-rubik group-hover:text-FirstColour transition-all cursor-default uppercase">{link.buttontitle}</h3>
+                            {link.image?<img className="w-auto h-[25px] mr-2" src={urlFor(link.image)}></img>:null}
+                            {link.buttontitle?<h3 className="text-Text font-rubik group-hover:text-FirstColour transition-all cursor-default uppercase">{link.buttontitle}</h3>:null}
                         </a>
 
                     ))}
