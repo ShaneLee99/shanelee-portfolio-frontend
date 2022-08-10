@@ -78,7 +78,7 @@ Account
 
               </Jarallax>
 
-            <div className="w-screen h-screen pt-10 flex flex-col items-center">
+            <div className="w-screen h-full pt-10 flex flex-col items-center">
                 
                 <div className="max-w-lg w-full flex flex-col items-center space-y-5 mt-5">
                     {links?.map((link, _key) => (
