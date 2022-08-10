@@ -31,7 +31,7 @@ const blogpost = ({
             
 
             {Navbar?.headerlogo?
-              <a href="/"><img className="max-h-10" alt={Navbar.headerlogoalt} src={urlFor(Navbar.headerlogo)} /></a>
+              <a href="/"><img className="max-h-10 hover:scale-[0.9] transition-all" alt={Navbar.headerlogoalt} src={urlFor(Navbar.headerlogo)} /></a>
             :
             <a href="/" className="text-Text font-poppins font-[600] text-lg">{Navbar.headerlogoalt}</a>}
           
