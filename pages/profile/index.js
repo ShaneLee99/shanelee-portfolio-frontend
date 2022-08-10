@@ -137,26 +137,26 @@ const profile = ({
       </div>
 
       {Blog?
-      <div id="blog" className="mt-20 flex flex-col items-center">
-        <h2 className="text-Text font-poppins font-[800] text-2xl md:text-4xl lg:text-5xl uppercase tracking-wide leading-[1]">Recent Blog Post</h2>
-        <div className="border-[1px] my-8 w-64 border-Text"></div>
+        <div id="blog" className="mt-20 flex flex-col items-center">
+            <h2 className="text-Text font-poppins font-[800] text-2xl md:text-4xl lg:text-5xl uppercase tracking-wide leading-[1]">Recent Blog Post</h2>
+            <div className="border-[1px] my-8 w-64 border-Text"></div>
 
-        <a href={`/blog/${Blog.slug.current}`} className="w-full md:max-w-4xl max-w-md h-44 bg-SecondryBackground rounded-xl flex items-center md:p-8 p-4 hover:scale-[0.98] transition-all">
-          {Blog.image?<img src={urlFor(Blog.image)} className="md:w-[100px] md:h-[100px] h-[75px] w-[75px] rounded-full"></img>:null}
-          <div className="text-Text ml-5">
-            {Blog.title?<h2 className="font-[500] text-xl font-poppins">{Blog.title}</h2>:null}
-            <div className="font-[300] md:text-base text-xs mt-2 text-Text font-rubik flex md:flex-row flex-col md:space-y-0 space-y-2">
-              <p className="mr-2">Posted: {DateTime}</p>
-              {Blog.portfolio.title?<p className="md:flex hidden mr-2">/</p>:null}
-              {Blog.portfolio.title?<p className="">Portfolio Refrence: {Blog.portfolio.title}</p>:null}
+            <a href={`/blog/${Blog.slug.current}`} className="w-full md:max-w-4xl max-w-md h-44 bg-SecondryBackground rounded-xl flex items-center md:p-8 p-4 hover:scale-[0.98] transition-all">
+            {Blog.image?<img src={urlFor(Blog.image)} className="md:w-[100px] md:h-[100px] h-[75px] w-[75px] rounded-full"></img>:null}
+            <div className="text-Text ml-5">
+                {Blog.title?<h2 className="font-[500] text-xl font-poppins">{Blog.title}</h2>:null}
+                <div className="font-[300] md:text-base text-xs mt-2 text-Text font-rubik flex md:flex-row flex-col md:space-y-0 space-y-2">
+                <p className="mr-2">Posted: {DateTime}</p>
+                {Blog.portfolio.title?<p className="md:flex hidden mr-2">/</p>:null}
+                {Blog.portfolio.title?<p className="">Portfolio Refrence: {Blog.portfolio.title}</p>:null}
+                </div>
             </div>
-          </div>
-        </a>
+            </a>
 
-        <a href="/blog" className="mt-10 bg-FirstColour border-2 border-FirstColour hover:bg-transparent text-Text hover:text-FirstColour h-10 w-32 flex items-center justify-center rounded-lg transition-all">
-            <h2>View All Posts</h2>
-        </a>
-      </div>
+            <a href="/blog" className="mt-10 bg-FirstColour border-2 border-FirstColour hover:bg-transparent text-Text hover:text-FirstColour h-10 w-32 flex items-center justify-center rounded-lg transition-all">
+                <h2>View All Posts</h2>
+            </a>
+        </div>
       :null}
 
 
@@ -337,16 +337,16 @@ const profile = ({
 }
 
 export const getServerSideProps = async (pageContext) => {
-  const pageSlug = pageContext.query.slug
   const DomainName = pageContext.req.headers.host
 
-  const query = `*[ _type == "account" && slug.current == $pageSlug][0]{
+  const query = `*[ _type == "account"][0]{
     name,
     desc,
     image,
     banner,
     aboutme,
     resume,
+    slug,
     contactme,
     "ResumeFile": resume.resume.asset->{
       url,
@@ -362,13 +362,11 @@ export const getServerSideProps = async (pageContext) => {
     directorys
   }`
 
-  const portfolio_query = `*[_type == "portfolio" && owninguser->slug.current == $pageSlug]{
-    title,
-    slug,
-    thumbnail
-  }`
 
-  const blog_query = `*[_type == "blog" && owninguser->slug.current == $pageSlug][0]{
+  const account = await sanityClient.fetch(query)
+  const navbar = await sanityClient.fetch(nav_query)
+
+  const blog_query = `*[_type == "blog" && owninguser->slug.current == $accslug][0]{
     title,
     post,
     image,
@@ -379,10 +377,16 @@ export const getServerSideProps = async (pageContext) => {
     }
   }`
 
-  const account = await sanityClient.fetch(query, { pageSlug })
-  const navbar = await sanityClient.fetch(nav_query)
-  const portfolios = await sanityClient.fetch(portfolio_query, { pageSlug })
-  const blog = await sanityClient.fetch(blog_query, { pageSlug })
+
+
+  const portfolio_query = `*[_type == "portfolio" && owninguser->slug.current == $accslug]{
+    title,
+    slug,
+    thumbnail
+  }`
+  const accslug = account.slug.current;
+  const portfolios = await sanityClient.fetch(portfolio_query, { accslug })
+  const blog = await sanityClient.fetch(blog_query, { accslug })
 
   var fileinfo = account.ResumeFile;
   const datetime = moment(blog.date).format(("dddd, MMMM Do YYYY, h:mma")); 
