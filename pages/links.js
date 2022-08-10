@@ -12,7 +12,7 @@ Navbar,
 Account
 }) => {
   return (
-        <div className="main bg-Background overflow-x-hidden">
+        <div className="main bg-Background min-h-screen h-full overflow-x-hidden">
 
             <Head>
                 <title>{DomainName} - Links</title>
